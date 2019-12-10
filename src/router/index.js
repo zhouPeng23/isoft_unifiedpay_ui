@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import index from '../index'
 import orderList from '../components/wechatpay/orderList'
-import baseLayout from '../components/wechatpay/baseLayout'
+import baseLayout from '../components/base/baseLayout'
 
 Vue.use(Router)
 
