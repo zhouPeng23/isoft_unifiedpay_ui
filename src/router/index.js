@@ -1,7 +1,6 @@
 //==============================================开始引入组件============================================================
 import Vue from 'vue'
 import Router from 'vue-router'
-const index = () => import('../index');
 const orderList  = () => import('../components/wechatpay/orderList');
 const baseLayout = () => import('../components/base/baseLayout');
 Vue.use(Router);
@@ -13,17 +12,12 @@ const wechatpayRouters = [
 ];
 
 
-
-
-
-
 //==============================================引入一级模块============================================================
 export default new Router({
   //去掉#号
   mode:'history',
   routes: [
-    {path: '/index',component: index},
     {path:'/wechatpay',component:baseLayout,children:wechatpayRouters},//微信支付
-    { path: '*', redirect: '/index' }
+    { path: '*', redirect: '/wechatpay/orderList' }
   ]
 })
