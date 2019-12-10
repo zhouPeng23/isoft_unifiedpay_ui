@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <div>this is index page</div>
+	<div>
+    <div>this is index vue</div>
   </div>
 </template>
 
 <script>
 	export default {
-		name: "Index"
+		name: "index"
 	}
 </script>
 
