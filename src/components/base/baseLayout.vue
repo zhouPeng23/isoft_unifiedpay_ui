@@ -3,7 +3,7 @@
     <Layout>
       <Header>
         <Menu mode="horizontal" theme="dark" active-name="1">
-          <div class="layout-logo"></div>
+          <!--<div class="layout-logo" style="font-size: 20px">&nbsp;&nbsp;领&nbsp;&nbsp;创&nbsp;&nbsp;科&nbsp;&nbsp;技</div>-->
           <div class="layout-nav">
             <MenuItem name="1">
               <Icon type="logo-yen" />
@@ -32,7 +32,7 @@
                 <Icon type="ios-navigate"></Icon>
                 订单查询
               </template>
-              <MenuItem name="1-1">实时消费监控</MenuItem>
+              <MenuItem name="1-1">消费实时监控</MenuItem>
               <MenuItem name="1-2">消费订单查询</MenuItem>
               <MenuItem name="1-3">退款订单查询</MenuItem>
             </Submenu>
@@ -58,9 +58,9 @@
           <Breadcrumb :style="{margin: '24px 0'}">
             <BreadcrumbItem>微信支付</BreadcrumbItem>
             <BreadcrumbItem>订单查询</BreadcrumbItem>
-            <BreadcrumbItem>实时消费监控</BreadcrumbItem>
+            <BreadcrumbItem>消费实时监控</BreadcrumbItem>
           </Breadcrumb>
-          <Content :style="{padding: '24px', minHeight: '450px', background: '#f4f5f9'}">
+          <Content :style="{padding: '24px', minHeight: '450px', background: '#fffafe'}">
             <router-view></router-view>
           </Content>
         </Layout>
@@ -82,14 +82,14 @@
     overflow: hidden;
   }
   .layout-logo{
-    width: 80px;
-    height: 40px;
-    background: #5b6270;
+    width: 135px;
+    height: 55px;
+    background: #cdb5f9;
     border-radius: 3px;
     float: left;
     position: relative;
-    top: 15px;
-    left: 20px;
+    top: 5px;
+    left: -20px;
   }
   .layout-nav{
     width: 60%;
