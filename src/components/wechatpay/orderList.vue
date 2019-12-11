@@ -1,13 +1,89 @@
 <template>
   <div>
-    <div>this is order list</div>
+    <div>
+      <Input v-model="OrderId" placeholder="订单号" style="width: 250px"/>
+      <Select v-model="TransType" placeholder="交易类型" style="width:100px">
+        <Option v-for="item in TransTypeList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+      </Select>
+      <Input v-model="ProductDesc" placeholder="商品描述" style="width: 150px"/>
+      <DatePicker v-model="TransTime" type="date" placeholder="交易日期" style="width: 140px"></DatePicker>
+      <Input v-model="TransAmount" placeholder="交易金额" style="width: 100px"/>
+      <Button type="primary" shape="circle" icon="ios-search" @click="queryOrder"></Button>
+    </div>
+    <div>
+      <Table width="1150" height="400" border :columns="columns2" :data="data4"></Table>
+    </div>
   </div>
 </template>
-
 <script>
-	export default {
-		name: "orderList"
-	}
+  import {QueryOrder} from '../../api/api'
+  export default {
+    name: "orderList",
+    data () {
+      return {
+        OrderId:'',
+        TransType:'',
+        TransTypeList:[{value:'SALE',label:'SALE'},{value:'REFUND',label:'REFUND'}],
+        ProductDesc:'',
+        TransTime:'',
+        TransAmount:'',
+        columns2: [
+          {title: '订单号',                   key: 'OrderId',                 width: 250,           fixed: 'left'},
+          {title: '交易类型',                 key: 'TransType',               width: 100},
+          {title: '商品描述',                 key: 'ProductDesc',             width: 150},
+          {title: '交易时间',                 key: 'TransTime',               width: 150},
+          {title: '交易金额',                 key: 'TransAmount',             width: 100},
+          {title: '下单结果描述',             key: 'OrderResultDesc',        width: 200},
+          {title: '付款业务结果描述',         key: 'PayResultDesc',          width: 200},
+          {title: '退款请求业务结果描述',    key: 'RefundReqResultDesc',    width: 200},
+          {title: '退款状态',                 key: 'RefundStatus',            width: 100},
+          {title: '已退金额',                 key: 'RefundedAmount',          width: 100},
+          {title: '操作',                     key: 'action',                   width: 120,         fixed: 'right',
+            render: (h, params) => {
+              return h('div', [
+                h('Button', {props: {type: 'text', size: 'small'}}, '查看详情'),
+              ]);
+            }
+          }
+        ],
+        data4: [
+          // {OrderId: '201912080943371000000062859163',
+          //   TransType:'SALE',
+          //   ProductDesc: '苹果手机',
+          //   TransTime: '20191208094337',
+          //   TransAmount: '5888.00',
+          //   OrderResultDesc:'下单成功',
+          //   PayResultDesc:'支付成功',
+          //   RefundReqResultDesc:'',
+          //   RefundStatus:'',
+          //   RefundedAmount:'20',
+          // },
+        ]
+      }
+    },
+    created:async function(){
+
+    },
+    methods:{
+      queryOrder:function () {
+        if (this.OrderId.length===0 && this.TransType.length===0 && this.ProductDesc.length===0 && this.TransTime.length===0 && this.TransAmount.length===0){
+          this.$Message.error('查询条件不能全部为空！');
+          return false;
+        }
+        let params = {
+          'OrderId':this.OrderId,
+          'TransType':this.TransType,
+          'ProductDesc':this.ProductDesc,
+          'TransTime':this.TransTime,
+          'TransAmount':this.TransAmount,
+        }
+        // var s = POST('/wechatPayApi/QueryOrder',params);
+        var queryOrder = QueryOrder(params);
+        alert(queryOrder)
+        this.data4[1] = queryOrder
+      }
+    }
+  }
 </script>
 
 <style scoped>
