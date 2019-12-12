@@ -21,6 +21,17 @@ new Vue({
 
 
 //=================================================以下是工具方法=======================================================
+
+//元->分
+function fen2Yuan(fen){
+  return fen/100
+}
+
+//分->元
+function yuan2Fen(yuan){
+  return yuan*100
+}
+
 //统一格式化日期
 Date.prototype.format = function(fmt) {
   let o = {

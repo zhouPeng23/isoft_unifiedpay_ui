@@ -66,7 +66,16 @@
           'TransAmount':this.TransAmount,
         };
         let orders = await QueryOrder(params);
-        this.data4 = JSON.parse(orders);
+        var ordersObj = JSON.parse(orders);
+        if (ordersObj.length === 0) {
+          this.$Message.warning("查不到数据！")
+        }else{
+          for (let i = 0; i < ordersObj.length; i++) {
+            ordersObj[i].TransAmount = ordersObj[i].TransAmount/100  //金额从分转为元
+          }
+          this.data4 = ordersObj;
+        }
+
       }
     }
   }
