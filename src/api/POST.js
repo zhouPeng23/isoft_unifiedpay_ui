@@ -2,26 +2,28 @@
 import axios from 'axios'
 import Qs from 'qs'
 
-/**
- * @return {string}
- */
 export function POST(url, params) {
-  var result = "2121";
-  //统一去首尾空格
-  var strings = Object.keys(params);
-  var trimParams = {};
-  for (let i in strings) {
-    trimParams[strings[i]] = params[strings[i]].trim()
-  }
-  axios.post(url, Qs.stringify(trimParams))
-    .then(res => {
-      // console.log(res.data);
-      result = res.data;
-    })
-    .catch(err => {
-      alert(err);
-    });
-  return result;
+  //返回异步请求结果
+  return new Promise(function(resolve,reject){
+    //统一去首尾空格
+    let strings = Object.keys(params);
+    let trimParams = {};
+    for (let i in strings) {
+      trimParams[strings[i]] = params[strings[i]].trim()
+    }
+    //发送请求并返回数据
+    axios.post(url, Qs.stringify(trimParams))
+      .then(res => {
+        console.log(res.data);
+        resolve(res.data);
+      })
+      .catch(err => {
+        console.log(err);
+        reject(err);
+      });
+  });
+
+
 }
 
 

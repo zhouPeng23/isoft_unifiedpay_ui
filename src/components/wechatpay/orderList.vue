@@ -46,26 +46,14 @@
             }
           }
         ],
-        data4: [
-          // {OrderId: '201912080943371000000062859163',
-          //   TransType:'SALE',
-          //   ProductDesc: '苹果手机',
-          //   TransTime: '20191208094337',
-          //   TransAmount: '5888.00',
-          //   OrderResultDesc:'下单成功',
-          //   PayResultDesc:'支付成功',
-          //   RefundReqResultDesc:'',
-          //   RefundStatus:'',
-          //   RefundedAmount:'20',
-          // },
-        ]
+        data4: []
       }
     },
     created:async function(){
 
     },
     methods:{
-      queryOrder:function () {
+      queryOrder:async function () {
         if (this.OrderId.length===0 && this.TransType.length===0 && this.ProductDesc.length===0 && this.TransTime.length===0 && this.TransAmount.length===0){
           this.$Message.error('查询条件不能全部为空！');
           return false;
@@ -74,13 +62,11 @@
           'OrderId':this.OrderId,
           'TransType':this.TransType,
           'ProductDesc':this.ProductDesc,
-          'TransTime':this.TransTime,
+          'TransTime':new Date(this.TransTime).format("yyyyMMdd"),
           'TransAmount':this.TransAmount,
-        }
-        // var s = POST('/wechatPayApi/QueryOrder',params);
-        var queryOrder = QueryOrder(params);
-        alert(queryOrder)
-        this.data4[1] = queryOrder
+        };
+        let orders = await QueryOrder(params);
+        this.data4 = JSON.parse(orders);
       }
     }
   }

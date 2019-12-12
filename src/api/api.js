@@ -1,4 +1,4 @@
-// 所有界面的跨站请求在此统一管理，统一为POST请求
+// 所有界面的跨站请求在此统一管理，统一为POST异步请求
 import {POST} from './POST'
 const baseUrl = '/wechatPayApi';
 
