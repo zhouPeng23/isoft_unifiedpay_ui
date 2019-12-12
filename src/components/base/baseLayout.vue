@@ -30,33 +30,33 @@
             <Submenu name="1">
               <template slot="title">
                 <Icon type="ios-navigate"></Icon>
-                订单管理
+                {{mainMenu1}}
               </template>
-              <MenuItem name="1-1">订单查询</MenuItem>
-              <MenuItem name="1-2">退款申请</MenuItem>
+              <MenuItem name="1-1"><router-link to="/wechatpay/payOrder">{{mainMenu1_01}}</router-link></MenuItem>
+              <MenuItem name="1-2"><router-link to="/wechatpay/orderList">{{mainMenu1_02}}</router-link></MenuItem>
+              <MenuItem name="1-3"><router-link to="/wechatpay/orderRefund">{{mainMenu1_03}}</router-link></MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
                 <Icon type="ios-keypad"></Icon>
-                交易统计
+                {{mainMenu2}}
               </template>
-              <MenuItem name="2-1">今日交易监控</MenuItem>
-              <MenuItem name="2-2">历史交易统计</MenuItem>
+              <MenuItem name="2-1"><router-link to="/wechatpay/test">{{mainMenu2_01}}</router-link></MenuItem>
+              <MenuItem name="2-2"><router-link to="/wechatpay/test">{{mainMenu2_02}}</router-link></MenuItem>
             </Submenu>
             <Submenu name="3">
               <template slot="title">
                 <Icon type="ios-analytics"></Icon>
-                系统配置
+                {{mainMenu3}}
               </template>
-              <MenuItem name="3-1">微信支付配置</MenuItem>
+              <MenuItem name="3-1"><router-link to="/wechatpay/test">{{mainMenu3_01}}</router-link></MenuItem>
             </Submenu>
           </Menu>
         </Sider>
         <Layout :style="{padding: '0 24px 24px'}">
           <Breadcrumb :style="{margin: '24px 0'}">
-            <BreadcrumbItem>微信支付</BreadcrumbItem>
-            <BreadcrumbItem>订单管理</BreadcrumbItem>
-            <BreadcrumbItem>订单查询</BreadcrumbItem>
+            <BreadcrumbItem><router-link to="/wechatpay/test">{{navigationMenu1}}</router-link></BreadcrumbItem>
+            <BreadcrumbItem><router-link to="/wechatpay/test">{{navigationMenu2}}</router-link></BreadcrumbItem>
           </Breadcrumb>
           <Content :style="{padding: '0px', minHeight: '450px', background: '#fffafe'}">
             <router-view></router-view>
@@ -68,7 +68,29 @@
 </template>
 <script>
   export default {
-    name:"baseLayout"
+    name:"baseLayout",
+    data() {
+      return {
+        //菜单
+        mainMenu1:'订单管理',
+          mainMenu1_01:'下单付款',
+          mainMenu1_02:'订单查询',
+          mainMenu1_03:'退款申请',
+        mainMenu2:'交易统计',
+          mainMenu2_01:'今日交易统计',
+          mainMenu2_02:'历史交易统计',
+        mainMenu3:'系统配置',
+          mainMenu3_01:'微信支付配置',
+        //导航
+        navigationMenu1:'订单管理',//导航栏
+        navigationMenu2:'下单付款',
+      }
+    },
+    methods:{
+      changeNavigation:function (param) {
+        alert(param);
+      }
+    }
   }
 </script>
 <style scoped>
