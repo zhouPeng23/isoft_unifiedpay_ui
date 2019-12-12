@@ -11,14 +11,19 @@
       <Button type="primary" shape="circle" icon="ios-search" @click="queryOrder"></Button>
     </div>
     <div>
-      <Table width="1150" height="400" border :columns="columns2" :data="data4"></Table>
+      <Table width="1150" height="400" border :columns="columns" :data="orders"></Table>
     </div>
+    <Modal title="订单详情" v-model="orderDetailModal" :mask-closable="false" width="1200">
+      <orderDetail :Order=orderDetailModalData></orderDetail>
+    </Modal>
   </div>
 </template>
 <script>
+  import orderDetail from './orderDetail'
   import {QueryOrder} from '../../api/api'
   export default {
     name: "orderList",
+    components:{orderDetail,},
     data () {
       return {
         OrderId:'',
@@ -27,26 +32,40 @@
         ProductDesc:'',
         TransTime:'',
         TransAmount:'',
-        columns2: [
+        orderDetailModal: false,
+        columns: [
           {title: '订单号',                   key: 'OrderId',                 width: 250,           fixed: 'left'},
           {title: '交易类型',                 key: 'TransType',               width: 100},
           {title: '商品描述',                 key: 'ProductDesc',             width: 150},
           {title: '交易时间',                 key: 'TransTime',               width: 150},
           {title: '交易金额',                 key: 'TransAmount',             width: 100},
-          {title: '下单结果描述',             key: 'OrderResultDesc',        width: 200},
-          {title: '付款业务结果描述',         key: 'PayResultDesc',          width: 200},
-          {title: '退款请求业务结果描述',    key: 'RefundReqResultDesc',    width: 200},
+          {title: '下单结果描述',             key: 'OrderResultDesc',        width: 140},
+          {title: '付款业务结果描述',         key: 'PayResultDesc',          width: 150},
+          {title: '退款请求业务结果描述',    key: 'RefundReqResultDesc',    width: 160},
           {title: '退款状态',                 key: 'RefundStatus',            width: 100},
           {title: '已退金额',                 key: 'RefundedAmount',          width: 100},
           {title: '操作',                     key: 'action',                   width: 120,         fixed: 'right',
             render: (h, params) => {
               return h('div', [
-                h('Button', {props: {type: 'text', size: 'small'}}, '查看详情'),
+                h('Button', {
+                  props: {type: 'text', size: 'small'},
+                  on:{
+                    click: () => {
+                      this.orderDetailModal = true;
+                      for (let i = 0; i < this.orders.length; i++) {
+                        if (this.orders[i].OrderId===this.orders[params.index].OrderId){
+                          this.orderDetailModalData = this.orders[i];
+                        }
+                      }
+                    }
+                  }
+                }, '查看详情'),
               ]);
             }
           }
         ],
-        data4: []
+        orders: [],
+        orderDetailModalData:{}
       }
     },
     created:async function(){
@@ -66,17 +85,18 @@
           'TransAmount':this.TransAmount,
         };
         let orders = await QueryOrder(params);
-        var ordersObj = JSON.parse(orders);
+        let ordersObj = JSON.parse(orders);
         if (ordersObj.length === 0) {
           this.$Message.warning("查不到数据！")
         }else{
           for (let i = 0; i < ordersObj.length; i++) {
             ordersObj[i].TransAmount = ordersObj[i].TransAmount/100  //金额从分转为元
+            ordersObj[i].RefundedAmount = ordersObj[i].RefundedAmount/100  //金额从分转为元
           }
-          this.data4 = ordersObj;
+          this.orders = ordersObj;
         }
 
-      }
+      },
     }
   }
 </script>
