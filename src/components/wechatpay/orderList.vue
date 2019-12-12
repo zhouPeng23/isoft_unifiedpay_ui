@@ -89,6 +89,7 @@
         if (ordersObj.length === 0) {
           this.$Message.warning("查不到数据！")
         }else{
+          this.$Message.success("查询成功！");
           for (let i = 0; i < ordersObj.length; i++) {
             ordersObj[i].TransAmount = ordersObj[i].TransAmount/100;  //金额从分转为元
             ordersObj[i].RefundedAmount = ordersObj[i].RefundedAmount/100  //金额从分转为元
