@@ -55,8 +55,8 @@
         </Sider>
         <Layout :style="{padding: '0 24px 24px'}">
           <Breadcrumb :style="{margin: '24px 0'}">
-            <BreadcrumbItem><router-link to="/wechatpay/test">{{navigationMenu1}}</router-link></BreadcrumbItem>
-            <BreadcrumbItem><router-link to="/wechatpay/test">{{navigationMenu2}}</router-link></BreadcrumbItem>
+            <!--<BreadcrumbItem>{{navigationMenu1}}</BreadcrumbItem>-->
+            <!--<BreadcrumbItem>{{navigationMenu2}}</BreadcrumbItem>-->
           </Breadcrumb>
           <Content :style="{padding: '0px', minHeight: '450px', background: '#fffafe'}">
             <router-view></router-view>
@@ -87,10 +87,13 @@
       }
     },
     methods:{
-      changeNavigation:function (param) {
-        alert(param);
+      changeNavigation:function (p2) {
+        alert(p2);
+        this.navigationMenu2 = p2;
       }
-    }
+    },
+
+
   }
 </script>
 <style scoped>
