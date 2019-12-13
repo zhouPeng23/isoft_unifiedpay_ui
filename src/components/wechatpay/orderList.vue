@@ -69,10 +69,9 @@
         orderDetailModalData:{}
       }
     },
-    created:{
-
-
-    },
+    // created:{
+    //
+    // },
     mounted (){
       //初始化界面，展示几条订单
       this.showLastedOrders()
