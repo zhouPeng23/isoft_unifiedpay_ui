@@ -28,14 +28,15 @@
       </FormItem>
     </Form>
     <Modal title="中央仓库" fullscreen  v-model="repositoryModal">
-      <!--<orderDetail :Order=orderDetailModalData></orderDetail>-->
-      <p>1234</p>
+      <showGoods></showGoods>
     </Modal>
   </div>
 </template>
 <script>
+  import showGoods from '../centralRepository/showGoods'
   export default {
     name:"payOrder",
+    components:{showGoods,},
     data (){
       return{
         ProductId:'',
