@@ -3,5 +3,6 @@ import {POST} from './POST'
 const baseUrl = '/wechatPayApi';
 
 export const QueryOrder = (params) => POST(baseUrl+'/QueryOrder',params);
+export const ShowLastedOrders = (params) => POST(baseUrl+'/ShowLastedOrders',params);
 
 

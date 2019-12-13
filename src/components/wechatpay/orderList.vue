@@ -1,6 +1,6 @@
-<!--订单查询-->
 <template>
   <div>
+    <br><div>订单管理 => 订单查询</div><br>
     <div>
       <Input v-model="OrderId" placeholder="订单号" style="width: 250px"/>
       <Select v-model="TransType" placeholder="交易类型" style="width:100px">
@@ -12,7 +12,7 @@
       <Button type="primary" shape="circle" icon="ios-search" @click="queryOrder"></Button>
     </div>
     <div>
-      <Table width="1150" height="400" border :columns="columns" :data="orders"></Table>
+      <Table width="1020" height="430" border :columns="columns" :data="orders"></Table>
     </div>
     <Modal title="订单详情" v-model="orderDetailModal" :mask-closable="false" width="1200">
       <orderDetail :Order=orderDetailModalData></orderDetail>
@@ -20,8 +20,8 @@
   </div>
 </template>
 <script>
+  import {QueryOrder,ShowLastedOrders} from '../../api/api'
   import orderDetail from './orderDetail'
-  import {QueryOrder} from '../../api/api'
   export default {
     name: "orderList",
     components:{orderDetail,},
@@ -60,7 +60,7 @@
                       }
                     }
                   }
-                }, '查看详情'),
+                }, '查看'),
               ]);
             }
           }
@@ -69,8 +69,13 @@
         orderDetailModalData:{}
       }
     },
-    created:async function(){
+    created:{
 
+
+    },
+    mounted (){
+      //初始化界面，展示几条订单
+      this.showLastedOrders()
     },
     methods:{
       queryOrder:async function () {
@@ -97,8 +102,26 @@
           }
           this.orders = ordersObj;
         }
-
       },
+
+      showLastedOrders:async function() {
+        let params = {
+          'count':'8',
+        };
+        let orders = await ShowLastedOrders(params);
+        let ordersObj = JSON.parse(orders);
+        if (ordersObj.length === 0) {
+          this.$Message.warning("查不到数据！")
+        }else{
+          for (let i = 0; i < ordersObj.length; i++) {
+            ordersObj[i].TransAmount = ordersObj[i].TransAmount/100;  //金额从分转为元
+            ordersObj[i].RefundedAmount = ordersObj[i].RefundedAmount/100  //金额从分转为元
+          }
+          this.orders = ordersObj;
+        }
+      }
+
+
     }
   }
 </script>

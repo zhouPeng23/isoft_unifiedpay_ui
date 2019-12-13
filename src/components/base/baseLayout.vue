@@ -34,7 +34,6 @@
               </template>
               <MenuItem name="1-1"><router-link to="/wechatpay/payOrder">{{mainMenu1_01}}</router-link></MenuItem>
               <MenuItem name="1-2"><router-link to="/wechatpay/orderList">{{mainMenu1_02}}</router-link></MenuItem>
-              <MenuItem name="1-3"><router-link to="/wechatpay/orderRefund">{{mainMenu1_03}}</router-link></MenuItem>
             </Submenu>
             <Submenu name="2">
               <template slot="title">
@@ -54,11 +53,11 @@
           </Menu>
         </Sider>
         <Layout :style="{padding: '0 24px 24px'}">
-          <Breadcrumb :style="{margin: '24px 0'}">
+          <Breadcrumb :style="{margin: '0px 0'}">
             <!--<BreadcrumbItem>{{navigationMenu1}}</BreadcrumbItem>-->
             <!--<BreadcrumbItem>{{navigationMenu2}}</BreadcrumbItem>-->
           </Breadcrumb>
-          <Content :style="{padding: '0px', minHeight: '450px', background: '#fffafe'}">
+          <Content :style="{padding: '0px', minHeight: '490px', background: '#f5f7f9'}">
             <router-view></router-view>
           </Content>
         </Layout>
@@ -75,7 +74,6 @@
         mainMenu1:'订单管理',
           mainMenu1_01:'下单付款',
           mainMenu1_02:'订单查询',
-          mainMenu1_03:'退款申请',
         mainMenu2:'交易统计',
           mainMenu2_01:'今日交易统计',
           mainMenu2_02:'历史交易统计',
@@ -115,7 +113,7 @@
     left: -20px;
   }
   .layout-nav{
-    width: 65%;
+    width: 40%;
     margin: 0 auto;
     margin-right: 20px;
   }

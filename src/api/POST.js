@@ -14,7 +14,7 @@ export function POST(url, params) {
     //发送请求并返回数据
     axios.post(url, Qs.stringify(trimParams))
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         resolve(res.data);
       })
       .catch(err => {

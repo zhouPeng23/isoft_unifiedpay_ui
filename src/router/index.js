@@ -25,6 +25,6 @@ export default new Router({
   mode:'history',
   routes: [
     {path:'/wechatpay',component:baseLayout,children:wechatpayRouters},//微信支付
-    { path: '*', redirect: '/wechatpay/orderList' }
+    { path: '*', redirect: '/wechatpay/payOrder' }
   ]
 })
